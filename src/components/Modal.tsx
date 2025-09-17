@@ -29,7 +29,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 10, opacity: 0, scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="fixed z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-2xl"
+            className="fixed z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-2xl text-black"
           >
             <div className="bg-white rounded-2xl p-6 card-shadow">
               <div className="flex justify-between items-center mb-4">

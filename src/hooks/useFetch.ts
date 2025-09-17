@@ -1,7 +1,7 @@
 'use client'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-export function useFetch<T = any>(endpoint: string, opts?: { simulateError?: boolean }) {
+export function useFetch<T>(endpoint: string, opts?: { simulateError?: boolean }) {
   const [data, setData] = useState<T | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)

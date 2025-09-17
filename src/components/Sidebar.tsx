@@ -3,11 +3,12 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { MdArticle, MdChevronLeft, MdChevronRight, MdClose, MdDashboard, MdMenu, MdPeople } from 'react-icons/md'
 
 const items = [
-  { href: '/', label: 'Dashboard' },
-  { href: '/posts', label: 'Posts' },
-  { href: '/users', label: 'Users' },
+  { href: '/', label: 'Dashboard', icon: MdDashboard },
+  { href: '/posts', label: 'Posts', icon: MdArticle },
+  { href: '/users', label: 'Users', icon: MdPeople },
 ]
 
 export default function Sidebar() {
@@ -35,7 +36,7 @@ export default function Sidebar() {
     <>
       {/* Mobile toggle button */}
       <button onClick={() => setMobileOpen(true)} className="md:hidden fixed top-4 left-4 z-50 p-2 bg-sky-500 text-white rounded-md" aria-label="open sidebar">
-        ☰
+        <MdMenu size={20} />
       </button>
 
       {/* Overlay (for mobile when sidebar is open) */}
@@ -63,11 +64,11 @@ export default function Sidebar() {
           <div className="flex gap-2">
             {/* Collapse button (desktop only) */}
             <button onClick={() => setCollapsed((s) => !s)} className="hidden md:block p-1 rounded-md hover:bg-slate-100 text-black" aria-label="toggle sidebar">
-              {collapsed ? '›' : '‹'}
+              {collapsed ? <MdChevronRight size={16} /> : <MdChevronLeft size={16} />}
             </button>
             {/* Close button (mobile only) */}
             <button onClick={() => setMobileOpen(false)} className="md:hidden p-1 rounded-md hover:bg-slate-100" aria-label="close sidebar">
-              ✕
+              <MdClose size={16} />
             </button>
           </div>
         </div>
@@ -75,6 +76,7 @@ export default function Sidebar() {
         <nav className="flex-1">
           {items.map((it) => {
             const isActive = pathname === it.href
+            const IconComponent = it.icon
             return (
               <Link
                 key={it.href}
@@ -83,7 +85,9 @@ export default function Sidebar() {
                 onClick={() => setMobileOpen(false)} // Close mobile sidebar on link click
               >
                 <motion.div whileHover={{ x: 6 }} className={`flex items-center gap-3 p-2 rounded-md ${isActive ? 'bg-sky-500 text-white' : 'hover:bg-slate-50 text-black'}`}>
-                  <div className={`w-8 h-8 rounded-md flex items-center justify-center ${isActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'}`}>{it.label[0]}</div>
+                  <div className={`w-8 h-8 rounded-md flex items-center justify-center ${isActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'}`}>
+                    <IconComponent size={16} />
+                  </div>
                   {!collapsed && <span className="text-sm">{it.label}</span>}
                 </motion.div>
               </Link>
