@@ -34,9 +34,9 @@ const Dashboard = ({ user }: { user: Session['user'] }) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-6">
           <Link href={'/profile'}>
-            <Image width={500} className="size-12 rounded-full border border-sky-500 p-1" height={500} src={user?.image || ''} alt={user?.name || ''} />
+            <Image width={500} className="size-12 min-w-12 rounded-full border border-sky-500 p-1" height={500} src={user?.image || ''} alt={user?.name || ''} />
           </Link>
-          <h1 className="text-2xl font-bold">Welcome back — {user?.name}</h1>
+          <h1 className="text-lg lg:text-2xl font-bold">Welcome back — {user?.name}</h1>
         </div>
         <motion.div initial={{ rotate: 0 }} animate={{ rotate: [0, 5, -5, 0] }} transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }} className="p-3 rounded-lg bg-white card-shadow">
           <div className="text-sm text-black">Animated Header Element</div>
