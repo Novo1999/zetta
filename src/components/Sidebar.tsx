@@ -94,8 +94,8 @@ export default function Sidebar() {
         </nav>
 
         <Button onClick={signOut} className="mt-auto">
-          <CiLogout />
-          Log Out
+          <CiLogout className='text-2xl' />
+          {!collapsed && 'Log Out'}
         </Button>
       </motion.aside>
     </>
