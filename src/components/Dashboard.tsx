@@ -7,6 +7,7 @@ import { useFetch } from '@/hooks/useFetch'
 import { motion } from 'framer-motion'
 import { Session, User } from 'next-auth'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 const Dashboard = ({ user }: { user: Session['user'] }) => {
   const { data: postsData, loading: loadingPosts } = useFetch<Post[]>(POSTS_URL)
@@ -32,7 +33,9 @@ const Dashboard = ({ user }: { user: Session['user'] }) => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-6">
-          <Image width={500} className="size-8 rounded-full" height={500} src={user?.image || ''} alt={user?.name || ''} />
+          <Link href={'/profile'}>
+            <Image width={500} className="size-12 rounded-full border border-sky-500 p-1" height={500} src={user?.image || ''} alt={user?.name || ''} />
+          </Link>
           <h1 className="text-2xl font-bold">Welcome back — {user?.name}</h1>
         </div>
         <motion.div initial={{ rotate: 0 }} animate={{ rotate: [0, 5, -5, 0] }} transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }} className="p-3 rounded-lg bg-white card-shadow">
