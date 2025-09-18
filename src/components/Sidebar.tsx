@@ -1,5 +1,7 @@
 'use client'
+import Button from '@/components/Button'
 import { AnimatePresence, motion } from 'framer-motion'
+import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -78,12 +80,7 @@ export default function Sidebar() {
             const isActive = pathname === it.href
             const IconComponent = it.icon
             return (
-              <Link
-                key={it.href}
-                href={it.href}
-                className="group block mb-1"
-                onClick={() => setMobileOpen(false)} // Close mobile sidebar on link click
-              >
+              <Link key={it.href} href={it.href} className="group block mb-1" onClick={() => setMobileOpen(false)}>
                 <motion.div whileHover={{ x: 6 }} className={`flex items-center gap-3 p-2 rounded-md ${isActive ? 'bg-sky-500 text-white' : 'hover:bg-slate-50 text-black'}`}>
                   <div className={`w-8 h-8 rounded-md flex items-center justify-center ${isActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'}`}>
                     <IconComponent size={16} />
@@ -95,7 +92,9 @@ export default function Sidebar() {
           })}
         </nav>
 
-        <div className="mt-auto text-xs text-slate-400">{!collapsed && 'Made with ❤️ • UI Test'}</div>
+        <Button onClick={signOut} className="mt-auto">
+          Log Out
+        </Button>
       </motion.aside>
     </>
   )
