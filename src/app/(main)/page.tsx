@@ -6,5 +6,5 @@ export default async function Home() {
   const session = await auth()
 
   if (!session?.user?.email) redirect('/login')
-  return <Dashboard />
+  return <Dashboard user={session?.user} />
 }
