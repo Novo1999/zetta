@@ -5,6 +5,7 @@ import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { CiLogout } from 'react-icons/ci'
 import { MdArticle, MdChevronLeft, MdChevronRight, MdClose, MdDashboard, MdMenu, MdPeople } from 'react-icons/md'
 
 const items = [
@@ -93,6 +94,7 @@ export default function Sidebar() {
         </nav>
 
         <Button onClick={signOut} className="mt-auto">
+          <CiLogout />
           Log Out
         </Button>
       </motion.aside>

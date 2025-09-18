@@ -23,9 +23,12 @@ export function useFetch<T>(endpoint: string, opts?: { simulateError?: boolean }
         const json = await res.json()
         setData(json)
         setLoading(false)
-      } catch (err: any) {
-        if (err.name === 'AbortError') return
-        setError(err.message || 'Unknown error')
+      } catch (err: unknown) {
+        if (err instanceof Error && err.name === 'AbortError') {
+          return
+        }
+
+        setError(getErrorMessage(err))
         setLoading(false)
       }
     },
@@ -46,4 +49,9 @@ export function useFetch<T>(endpoint: string, opts?: { simulateError?: boolean }
     error,
     refetch: (forceUrl?: string) => fetchData(forceUrl),
   }
+}
+const getErrorMessage = (error: unknown): string => {
+  if (error instanceof Error) return error.message
+  if (typeof error === 'string') return error
+  return 'Unknown error'
 }
